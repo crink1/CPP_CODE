@@ -37,7 +37,7 @@ using std::endl;
 
 namespace rin
 {
-	int rand = 0;
+	int x = 0;
 
 	int Add(int left,int right)
 	{
@@ -67,11 +67,29 @@ namespace rin
 	}
 }
 
+//int main()
+//{
+//	int a = rin::Add(2, 3);
+//	cout << a << endl;
+//	cout << rin::x << endl;
+//	return 0;
+//}
+// 
+//using rin::Add;
+//using rin::x;
+//int main()
+//{
+//	int a = Add(2, 3);
+//	cout << a << endl;
+//	cout << x << endl;
+//	return 0;
+//}
+using namespace rin;
 int main()
 {
-	int a = rin::Add(2, 3);
+	int a = Add(2, 3);
 	cout << a << endl;
-	cout << rin::rand << endl;
+	cout << x << endl;
 	return 0;
 }
 
