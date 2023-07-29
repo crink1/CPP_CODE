@@ -27,45 +27,45 @@
 //	return 0;
 //}
 
-#include<iostream>
-
-//using namespace std;
-
-using std::cout;
-using std::cin;
-using std::endl;
-
-namespace rin
-{
-	int x = 0;
-
-	int Add(int left,int right)
-	{
-		return left + right;
-	}
-
-	struct Node
-	{
-		struct Node* next;
-		int data;
-	};
-
-	namespace crin
-	{
-		int _rand = 0;
-
-		int _Add(int left, int right)
-		{
-			return left + right;
-		}
-
-		struct _Node
-		{
-			struct Node* next;
-			int data;
-		};
-	}
-}
+//#include<iostream>
+//
+////using namespace std;
+//
+//using std::cout;
+//using std::cin;
+//using std::endl;
+//
+//namespace rin
+//{
+//	int x = 0;
+//
+//	int Add(int left,int right)
+//	{
+//		return left + right;
+//	}
+//
+//	struct Node
+//	{
+//		struct Node* next;
+//		int data;
+//	};
+//
+//	namespace crin
+//	{
+//		int _rand = 0;
+//
+//		int _Add(int left, int right)
+//		{
+//			return left + right;
+//		}
+//
+//		struct _Node
+//		{
+//			struct Node* next;
+//			int data;
+//		};
+//	}
+//}
 
 //int main()
 //{
@@ -84,12 +84,12 @@ namespace rin
 //	cout << x << endl;
 //	return 0;
 //}
-using namespace rin;
-int main()
-{
-	int a = Add(2, 3);
-	cout << a << endl;
-	cout << x << endl;
-	return 0;
-}
-
+//using namespace rin;
+//int main()
+//{
+//	int a = Add(2, 3);
+//	cout << a << endl;
+//	cout << x << endl;
+//	return 0;
+//}
+//
