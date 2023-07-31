@@ -1,5 +1,5 @@
-#include<iostream>
-using namespace std;
+//#include<iostream>
+//using namespace std;
 
 //int main()
 //{
@@ -73,22 +73,22 @@ using namespace std;
 //	cout << a<< " " << b << endl;
 //	return 0;
 //}
-void Func(int&c)
-{
-	cout<<c<<endl;
-	c--;
-}
-
-int& f()
-{
-	static int d = 9;
-	return d;
-}
-
-int main()
-{
-	int a = 10;
-	
-	cout << --f()<< endl;
-	return 0;
-}
+//void Func(int&c)
+//{
+//	cout<<c<<endl;
+//	c--;
+//}
+//
+//int& f()
+//{
+//	static int d = 9;
+//	return d;
+//}
+//
+//int main()
+//{
+//	int a = 10;
+//	
+//	cout << --f()<< endl;
+//	return 0;
+//}
