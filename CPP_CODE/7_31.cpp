@@ -86,22 +86,22 @@ using namespace std;
 //		cout << e << endl;
 //}
 
-void func(int)
-{
-	cout << "f(int)" << endl;
-}
-void func(int*)
-{
-	cout << "f(int*)" << endl;
-}
-
-int main()
-{
-	func(0);
-	func(nullptr);
-	func((int*)NULL);
-	return 0;
-}
+//void func(int)
+//{
+//	cout << "f(int)" << endl;
+//}
+//void func(int*)
+//{
+//	cout << "f(int*)" << endl;
+//}
+//
+//int main()
+//{
+//	func(0);
+//	func(nullptr);
+//	func((int*)NULL);
+//	return 0;
+//}
 
 //int main()
 //{
