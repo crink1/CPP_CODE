@@ -29,6 +29,8 @@ public:
 	Date& operator--();
 	Date operator--(int);
 
+	Date& operator=(const Date& d);
+
 	int operator-(const Date& d);
 private:
 	int _year;

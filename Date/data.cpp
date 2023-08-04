@@ -1,8 +1,21 @@
 #include"date.h"
 
+Date& Date::operator=(const Date& d)
+{
+	if (this != &d)
+	{
+		_year = d._year;
+		_month = d._month;
+		_day = d._day;
+	}
+	
+	return *this;
+}
+
+
 int Date::GetMonthDay(int year, int month)
 {
-	int monthArray[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	const static int monthArray[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 	if (month == 2&& ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)))
 	{
@@ -17,7 +30,7 @@ Date::Date(int year, int month, int day)
 	_year = year;
 	_month = month;
 	_day = day;
-	if (month > 12 || day > GetMonthDay(year, month))
+	if (month < 1 || month > 12 || day < 1 || day > GetMonthDay(year, month))
 	{
 		cout << "日期不合法" << endl;
 	}
@@ -190,3 +203,4 @@ int Date::operator-(const Date& d)
 	}
 	return n;
 }
+

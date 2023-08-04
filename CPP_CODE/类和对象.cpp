@@ -139,70 +139,70 @@ typedef int STDataType;
 //}
 
 
-struct Stack
-{
-public:
-	Stack()
-	{
-		_a = nullptr;
-		_size = _capacity = 0;
-	}
-	Stack(size_t capacity)
-	{
-		_a = nullptr;
-		_size = 0;
-		_capacity = capacity;
-
-	}
-
-	bool STEmpty()
-	{
-
-		return _size == 0;
-	}
-
-	void STPush(const STDataType& x)
-	{
-
-		if (_size == _capacity)
-		{
-			int newcapacity = _capacity == 0 ? 4 : _capacity * 2;
-			STDataType* tmp = (STDataType*)realloc(_a, sizeof(STDataType) * newcapacity);
-			if (NULL == tmp)
-			{
-				perror("realloc fail");
-				return;
-			}
-			_a = tmp;
-			_capacity = newcapacity;
-
-		}
-		_a[_size] = x;
-		_size++;
-	}
-
-
-	~Stack()
-	{
-		if (_a)
-		{
-			free(_a);
-			_a = NULL;
-			_capacity = 0;
-			_size = 0;
-		}
-	}
-private:
-	STDataType* _a;
-	int _size;
-	size_t _capacity;
-};
-
-int main()
-{
-	Stack st;
-	st.STPush(1);
-	st.STPush(2);
-	return 0;
-
-}
+//struct Stack
+//{
+//public:
+//	Stack()
+//	{
+//		_a = nullptr;
+//		_size = _capacity = 0;
+//	}
+//	Stack(size_t capacity)
+//	{
+//		_a = nullptr;
+//		_size = 0;
+//		_capacity = capacity;
+//
+//	}
+//
+//	bool STEmpty()
+//	{
+//
+//		return _size == 0;
+//	}
+//
+//	void STPush(const STDataType& x)
+//	{
+//
+//		if (_size == _capacity)
+//		{
+//			int newcapacity = _capacity == 0 ? 4 : _capacity * 2;
+//			STDataType* tmp = (STDataType*)realloc(_a, sizeof(STDataType) * newcapacity);
+//			if (NULL == tmp)
+//			{
+//				perror("realloc fail");
+//				return;
+//			}
+//			_a = tmp;
+//			_capacity = newcapacity;
+//
+//		}
+//		_a[_size] = x;
+//		_size++;
+//	}
+//
+//
+//	~Stack()
+//	{
+//		if (_a)
+//		{
+//			free(_a);
+//			_a = NULL;
+//			_capacity = 0;
+//			_size = 0;
+//		}
+//	}
+//private:
+//	STDataType* _a;
+//	int _size;
+//	size_t _capacity;
+//};
+//
+//int main()
+//{
+//	Stack st;
+//	st.STPush(1);
+//	st.STPush(2);
+//	return 0;
+//
+//}
