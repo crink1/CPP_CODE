@@ -3,10 +3,10 @@
 
 int main()
 {
-	int a = 0;
-	int b = 9;
-	int& c = a;
-	a = b;
-	b = c;
+	crin::string a("chjsaikcde");
+	crin::string b("cde");
+	//size_t x = a.find(b.c_str(), 0);
+
+	b.insert(2, 'i');
 	return 0;
 }

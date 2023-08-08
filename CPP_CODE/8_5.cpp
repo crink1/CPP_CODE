@@ -146,41 +146,41 @@ using namespace std;
 //}
 //
 //
-class Date
-{
-public:
-    Date(int year = 1970, int month = 1, int day = 1)
-    {
-        _year = year;
-        _month = month;
-        _day = day;
-    }
-    void Print()
-    {
-        cout << "Print()" << endl;
-        cout << "year:" << _year << endl;
-        cout << "month:" << _month << endl;
-        cout << "day:" << _day << endl << endl;
-    }
-    void Print() const //相当于void Print(const Data* this)
-    {
-        
-        cout << "Print()const" << endl;
-        cout << "year:" << _year << endl;
-        cout << "month:" << _month << endl;
-        cout << "day:" << _day << endl << endl;
-    }
-private:
-    int _year;
-    int _month;
-    int _day;
-};
-
-int main()
-{
-    Date d1;
-    const Date d2(2000, 8, 8);
-    d2.Print();
-
-    return 0;
-}
+//class Date
+//{
+//public:
+//    Date(int year = 1970, int month = 1, int day = 1)
+//    {
+//        _year = year;
+//        _month = month;
+//        _day = day;
+//    }
+//    void Print()
+//    {
+//        cout << "Print()" << endl;
+//        cout << "year:" << _year << endl;
+//        cout << "month:" << _month << endl;
+//        cout << "day:" << _day << endl << endl;
+//    }
+//    void Print() const //相当于void Print(const Data* this)
+//    {
+//        
+//        cout << "Print()const" << endl;
+//        cout << "year:" << _year << endl;
+//        cout << "month:" << _month << endl;
+//        cout << "day:" << _day << endl << endl;
+//    }
+//private:
+//    int _year;
+//    int _month;
+//    int _day;
+//};
+//
+//int main()
+//{
+//    Date d1;
+//    const Date d2(2000, 8, 8);
+//    d2.Print();
+//
+//    return 0;
+//}

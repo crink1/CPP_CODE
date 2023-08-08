@@ -32,7 +32,7 @@ namespace crin
 
         string(const string& s)
         {
-            _str = new char[s._capacity];
+            _str = new char[s._capacity + 1];
             strcpy(_str, s._str);
             _size = s._size;
             _capacity = s._capacity;
@@ -40,10 +40,12 @@ namespace crin
 
         string& operator=(const string& s)
         {
-            _str = new char[s._capacity];
+            if (_capacity < s._capacity)
+            {
+                reserve(s._capacity);
+            }
             strcpy(_str, s._str);
             _size = s._size;
-            _capacity = s._capacity;
             return *this;
         }
 
@@ -82,7 +84,7 @@ namespace crin
         {
             if (n > _capacity)
             {
-                char* tmp = new char[_capacity];
+                char* tmp = new char[n+1];
                 strcpy(tmp, _str);
                 delete[] _str;
                 _str = tmp;
@@ -96,8 +98,7 @@ namespace crin
         {
             if (_size == _capacity)
             {
-                _capacity = _capacity == 0 ? 4 : _capacity * 2;
-                reserve(_capacity);
+                reserve(_capacity == 0 ? 4 : _capacity * 2);
             }
             _str[_size] = c;
             _size++;
@@ -173,11 +174,14 @@ namespace crin
             }
             else
             {
-
+                    reserve(n);
+ 
                 for (size_t i = _size; i < n; i++)
                 {
-                    _str += c;
+                    _str[_size] = c;
+                    ++_size;
                 }
+                _str[_size] = '\0';
 
             }
         }
@@ -246,11 +250,49 @@ namespace crin
 
         // 返回子串s在string中第一次出现的位置
 
-        size_t find(const char* s, size_t pos = 0) const;
+        size_t find(const char* s, size_t pos = 0) const
+        {
+            for (size_t i = pos; i < _size; i++)
+            {
+                if (_str[i] == s[0])
+                {
+                    size_t j = i, k = 0;
+                    while (_str[j] == s[k])
+                    {
+                        if (_str[j] == '\0' || s[k] == '\0')
+                        {
+                            break;
+                        }
+                        j++;
+                        k++;
+
+                    }
+                    if (s[k] == '\0')
+                    {
+                        return i;
+                    }
+                }
+            }
+            return npos;
+        }
+        
 
         // 在pos位置上插入字符c/字符串str，并返回该字符的位置
 
-        string& insert(size_t pos, char c);
+        string& insert(size_t pos, char c)
+        {
+            if (_size == _capacity)
+            {
+                reserve(_capacity == 0 ? 4 : _capacity * 2);
+            }
+            for (size_t i = _size+1; i > pos; i--)
+            {
+                _str[i] = _str[i - 1];
+            }
+            _str[pos] = c;
+            _size++;
+            return *this;
+        }
 
         string& insert(size_t pos, const char* str);
 
@@ -263,10 +305,10 @@ namespace crin
     private:
 
         char* _str;
-
+        size_t _size;
         size_t _capacity;
 
-        size_t _size;
+        
         const static size_t npos;
 
     };
