@@ -11,12 +11,8 @@ namespace crin
 
     {
 
-        friend ostream& operator<<(ostream& _cout, const crin::string& s);
-
-        friend istream& operator>>(istream& _cin, crin::string& s);
-
     public:
-
+        
         typedef char* iterator;
         typedef const char* const_iterator;
 
@@ -29,16 +25,32 @@ namespace crin
             _str = new char[_capacity+1];
             strcpy(_str, str);
         }
-
+        
+        
+        //现代写法
         string(const string& s)
+            :_str(nullptr)
+            ,_size(0)
+            ,_capacity(0)
+        {
+            string tmp(s._str);
+            swap(tmp);
+        }
+        /*string(const string& s)
         {
             _str = new char[s._capacity + 1];
             strcpy(_str, s._str);
             _size = s._size;
             _capacity = s._capacity;
-        }
+        }*/
 
-        string& operator=(const string& s)
+        //现代写法
+        string& operator=(string s)
+        {
+            swap(s);
+            return *this;
+        }
+       /* string& operator=(const string& s)
         {
             if (_capacity < s._capacity)
             {
@@ -47,7 +59,7 @@ namespace crin
             strcpy(_str, s._str);
             _size = s._size;
             return *this;
-        }
+        }*/
 
         ~string()
         {
@@ -238,6 +250,7 @@ namespace crin
 
         size_t find(char c, size_t pos = 0) const
         {
+            assert(pos < _size);
             for (size_t i = pos; i < _size; i++)
             {
                 if(_str[i] == c)
@@ -252,6 +265,7 @@ namespace crin
 
         size_t find(const char* s, size_t pos = 0) const
         {
+            assert(pos < _size);
             for (size_t i = pos; i < _size; i++)
             {
                 if (_str[i] == s[0])
@@ -276,11 +290,29 @@ namespace crin
             return npos;
         }
         
+        string substr(size_t pos, size_t len = npos)
+        {
+            string s;
+            size_t end = pos + len;
+            if (len == npos || pos + len > _size)
+            {
+                len = _size - pos;
+                end = _size;
 
+            }
+            s.reserve(len);
+            for (size_t i = pos; i < end; i++)
+            {
+                s += _str[i];
+            }
+            return s;
+            
+        }
         // 在pos位置上插入字符c/字符串str，并返回该字符的位置
 
         string& insert(size_t pos, char c)
         {
+            assert(pos < _size);
             if (_size == _capacity)
             {
                 reserve(_capacity == 0 ? 4 : _capacity * 2);
@@ -294,13 +326,40 @@ namespace crin
             return *this;
         }
 
-        string& insert(size_t pos, const char* str);
+        string& insert(size_t pos, const char* str)
+        {
+            assert(pos < _size);
+            size_t len = strlen(str);
+
+            if (len + _size > _capacity)
+            {
+                reserve(len + _size);
+            }
+            for (size_t end = _size+1; end > pos ; end--)
+            {
+                _str[end+len-1] = _str[end-1];
+                
+            }
+            _size += len;
+            //_str[_size] = '\0';
+            strncpy(_str + pos, str, len);
+            return *this;
+        }
 
 
 
         // 删除pos位置上的元素，并返回该元素的下一个位置
 
-        string& erase(size_t pos, size_t len);
+        string& erase(size_t pos, size_t len)
+        {
+            assert(pos < _size);
+            for (size_t i = pos + len; i <= _size; i++)
+            {
+                _str[pos++] = _str[i];
+            }
+            _size -= len;
+            return *this;
+        }
 
     private:
 
@@ -315,3 +374,46 @@ namespace crin
     const size_t string::npos = -1;
 
 };
+
+ostream& operator<<(ostream& _cout, const crin::string& s)
+{
+    for (auto c : s)
+    {
+        _cout << c;
+   }
+    return _cout;
+}
+
+istream& operator>>(istream& _cin, crin::string& s)
+{
+    /*char ch = _cin.get();
+    while (ch != ' ' && ch != '\n')
+    {
+        s += ch;
+        ch = _cin.get();
+    }*/
+
+    char buff[129];
+    char ch = _cin.get();
+    int i = 0;
+    while (ch != ' ' && ch != '\n')
+    {
+        if (i <= 128)
+        {
+            buff[i++] = ch;
+        }
+        else
+        {
+            buff[i] = '\0';
+            s += buff;
+            i = 0;
+        }
+        ch = _cin.get();
+    }
+    if (i != 0)
+    {
+        buff[i] = '\0';
+        s += buff;
+    }
+    return _cin;
+}
