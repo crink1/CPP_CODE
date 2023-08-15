@@ -15,11 +15,11 @@ namespace crin
 		_List_Node* prev;
 		_List_Node* next;
 	};
-	 template<class T>
+	 template<class T,class Ref,class Ptr>
 	 struct _List_Iterator
 	 {
 		 typedef _List_Node<T> Node;
-		 typedef _List_Iterator<T> iterator;
+		 typedef _List_Iterator<T,Ref,Ptr> iterator;
 		 Node* _Node;
 
 		 _List_Iterator(Node* Node)
@@ -35,9 +35,13 @@ namespace crin
 		 }
 
 
-		 T& operator*()
+		 Ref operator*()
 		 {
 			 return _Node->_data;
+		 }
+		 Ptr operator->()
+		 {
+			 return &_Node->_data;
 		 }
 
 		 iterator& operator++()
@@ -75,7 +79,8 @@ namespace crin
 		 typedef _List_Node<T> Node;
 		
 	 public:
-		 typedef _List_Iterator<T> iterator;
+		 typedef _List_Iterator<T,T&,T*> iterator;
+		 typedef _List_Iterator<T, const T&, const T*> const_iterator;
 		 iterator begin()
 		 {
 			 return _head->next;

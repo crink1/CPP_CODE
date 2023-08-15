@@ -2,9 +2,22 @@
 #include"List.h"
 using namespace std;
 
+
+
+class DD
+{
+public:
+	void print()
+	{
+		cout<<_a<<" "<<_b<< endl;
+	}
+private:
+	int _a;
+	int _b;
+};
 int main()
 {
-	crin::List<int> lt;
+	/*crin::List<int> lt;
 	lt.push_back(0);
 	lt.push_back(1);
 	lt.push_back(2);
@@ -24,6 +37,11 @@ int main()
 		cout << n << " ";
 	}
 
-	crin::List<int> lt2(lt);
+	crin::List<int> lt2(lt);*/
+
+	crin::List<DD> lt;
+	crin::List<DD>::iterator it = lt.begin();
+	it->print();
+	
 	return 0;
 }
