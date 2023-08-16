@@ -54,27 +54,27 @@ using namespace std;
 //	return 0;
 //}
 
-
-class A
-{
-public:
-	A()
-	:x(10)
-	{}
-	class B
-	{
-	public:
-		void func(const A& a)
-		{
-			cout<<a.x<<endl;
-		}
-	};
-private:
-	int x;
-};
-
-int main()
-{
-	A::B().func(A());
-	return 0;
-}
+//
+//class A
+//{
+//public:
+//	A()
+//	:x(10)
+//	{}
+//	class B
+//	{
+//	public:
+//		void func(const A& a)
+//		{
+//			cout<<a.x<<endl;
+//		}
+//	};
+//private:
+//	int x;
+//};
+//
+//int main()
+//{
+//	A::B().func(A());
+//	return 0;
+//}
