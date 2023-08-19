@@ -1,5 +1,5 @@
-#include<iostream>
-using namespace std;
+//#include<iostream>
+//using namespace std;
 
 //int main()
 //{
@@ -84,29 +84,29 @@ using namespace std;
 //        return;
 //}
 
-class A
-{
-public:
-
-	A(int a)
-		:_a(a)
-	{
-		cout << "A():" << this << endl;
-	}
-	~A()
-	{
-		cout << "~A():" << this << endl;
-	}
-
-private:
-	int _a;
-};
-
-int main()
-{
-	A* ptr1 = (A*)malloc(sizeof(A));
-	new(ptr1)A(6);//构造函数有参数要传参
-	delete ptr1;
-
-	return 0;
-}
+//class A
+//{
+//public:
+//
+//	A(int a)
+//		:_a(a)
+//	{
+//		cout << "A():" << this << endl;
+//	}
+//	~A()
+//	{
+//		cout << "~A():" << this << endl;
+//	}
+//
+//private:
+//	int _a;
+//};
+//
+//int main()
+//{
+//	A* ptr1 = (A*)malloc(sizeof(A));
+//	new(ptr1)A(6);//构造函数有参数要传参
+//	delete ptr1;
+//
+//	return 0;
+//}
