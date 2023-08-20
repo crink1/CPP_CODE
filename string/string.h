@@ -8,9 +8,7 @@ namespace crin
 {
 
     class string
-
     {
-
     public:
         
         typedef char* iterator;
@@ -22,6 +20,11 @@ namespace crin
             :_size(strlen(str))
             ,_capacity(_size)
         {
+            if (str == nullptr)
+            {
+                assert(false);
+                return;
+            }
             _str = new char[_capacity+1];
             strcpy(_str, str);
         }
@@ -63,9 +66,12 @@ namespace crin
 
         ~string()
         {
-            delete[] _str;
-            _str = nullptr;
-            _size = _capacity = 0;
+            if (_str)
+            {
+                delete[] _str;
+                _str = nullptr;
+                _size = _capacity = 0;
+            } 
         }
 
 

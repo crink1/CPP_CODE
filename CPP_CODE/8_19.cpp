@@ -79,24 +79,24 @@ using namespace std;
 //}
 
 
-void test()
-{
-	string s("hello world");
-	s.push_back('!');
-	s.push_back('!');
-	s.append(" hello");
-	s += " hello";
-	cout << s << endl;
-	cout << s.c_str() << endl;   // 以C语言的方式打印字符串
-
-	string file("string.cpp");
-	size_t pos = file.rfind('.');
-	string suffix(file.substr(pos, file.size() - pos));
-	cout << suffix << endl;
-}
-
-int main()
-{
-	test();
-	return 0;
-}
+//void test()
+//{
+//	string s("hello world");
+//	s.push_back('!');
+//	s.push_back('!');
+//	s.append(" hello");
+//	s += " hello";
+//	cout << s << endl;
+//	cout << s.c_str() << endl;   // 以C语言的方式打印字符串
+//
+//	string file("string.cpp");
+//	size_t pos = file.rfind('.');
+//	string suffix(file.substr(pos, file.size() - pos));
+//	cout << suffix << endl;
+//}
+//
+//int main()
+//{
+//	test();
+//	return 0;
+//}
