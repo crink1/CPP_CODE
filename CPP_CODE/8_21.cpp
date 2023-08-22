@@ -1,6 +1,6 @@
-#include<iostream>
-#include<vector>
-using namespace std;
+//#include<iostream>
+//#include<vector>
+//using namespace std;
 //vector<int> v1;                               
 //vector<int> v2(4, 100);                       
 //vector<int> v3(v2.begin(), v2.end());  
@@ -36,35 +36,35 @@ using namespace std;
 //	cout << '\n';
 //}
 
-void Test()
-{
-	vector<int> v;
-	v.push_back(1);
-	v.push_back(2);
-	v.push_back(3);
-	v.push_back(4);
-
-	auto it = v.begin();
-	while (it != v.end())
-	{
-		cout << *it << " ";
-		++it;
-	}
-	cout << endl;
-
-	v.pop_back();
-	v.pop_back();
-
-	it = v.begin();
-	while (it != v.end())
-	{
-		cout << *it << " ";
-		++it;
-	}
-	cout << endl;
-}
-int main()
-{
-	Test();
-	return 0;
-}
+//void Test()
+//{
+//	vector<int> v;
+//	v.push_back(1);
+//	v.push_back(2);
+//	v.push_back(3);
+//	v.push_back(4);
+//
+//	auto it = v.begin();
+//	while (it != v.end())
+//	{
+//		cout << *it << " ";
+//		++it;
+//	}
+//	cout << endl;
+//
+//	v.pop_back();
+//	v.pop_back();
+//
+//	it = v.begin();
+//	while (it != v.end())
+//	{
+//		cout << *it << " ";
+//		++it;
+//	}
+//	cout << endl;
+//}
+//int main()
+//{
+//	Test();
+//	return 0;
+//}
