@@ -1,7 +1,7 @@
-#include<iostream>
-#include<list>
-#include<vector>
-using namespace std;
+//#include<iostream>
+//#include<list>
+//#include<vector>
+//using namespace std;
 
 //void Test()
 //{
@@ -35,20 +35,20 @@ using namespace std;
 //    }
 //    
 //}
-void Test()
-{
-    list<int> l{ 1,2,3,4,5,6 };
-    list<int>::iterator it = l.begin();
-    while (it != l.end())
-    {
-        it = l.erase(it);  
-    }
-
-}
-
-int main()
-{
-
-    Test();
-    return 0;
-}
+//void Test()
+//{
+//    list<int> l{ 1,2,3,4,5,6 };
+//    list<int>::iterator it = l.begin();
+//    while (it != l.end())
+//    {
+//        it = l.erase(it);  
+//    }
+//
+//}
+//
+//int main()
+//{
+//
+//    Test();
+//    return 0;
+//}
