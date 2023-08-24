@@ -15,6 +15,68 @@ namespace crin
 		_List_Node* prev;
 		_List_Node* next;
 	};
+
+	 template<class Iterator, class Ref, class Ptr>
+	 struct Reverse_iterator
+	 {
+		 
+		 typedef Reverse_iterator<Iterator,Ref,Ptr> reverse_iterator;
+		 Iterator _it;
+		 Reverse_iterator(Iterator it)
+			 :_it(it)
+		 {}
+		 
+		 bool operator!=(const reverse_iterator& it)
+		 {
+			 return _it= it;
+		 }
+		 bool operator==(const reverse_iterator& it)
+		 {
+			 return _it == it;
+		 }
+
+
+		 Ref operator*()
+		 {
+			 Iterator temp(_it);
+			 --temp;
+			 return *temp;
+		 }
+		 Ptr operator->()
+		 {
+			 return &(operator*());
+		 }
+
+		 reverse_iterator& operator++()
+		 {
+			 --_it;
+			 return *this;
+		 }
+
+		 reverse_iterator& operator--()
+		 {
+			
+			 ++_it;
+			 return *this;
+		 }
+
+		 reverse_iterator operator++(int)
+		 {
+			 reverse_iterator tmp(*this);
+			 --_it;
+			 return tmp;
+		 }
+
+		 reverse_iterator operator--(int)
+		 {
+			 reverse_iterator tmp(*this);
+			 ++_it;
+			 return tmp;
+		 }
+
+
+	 };
+
 	 template<class T,class Ref,class Ptr>
 	 struct _List_Iterator
 	 {
@@ -81,6 +143,8 @@ namespace crin
 	 public:
 		 typedef _List_Iterator<T,T&,T*> iterator;
 		 typedef _List_Iterator<T, const T&, const T*> const_iterator;
+		 typedef Reverse_iterator<T, T&, T*> reverse_iterator;
+		 typedef Reverse_iterator<T, const T&, const T*> const_reverse_iterator;
 		 iterator begin()
 		 {
 			 return _head->next;
@@ -88,6 +152,30 @@ namespace crin
 		 iterator end()
 		 {
 			 return _head;
+		 }
+		 reverse_iterator rbegin()
+		 {
+			 return reverse_iterator(end());
+		 }
+		 reverse_iterator rend()
+		 {
+			 return reverse_iterator(begin());
+		 }
+		 const_iterator begin() const
+		 {
+			 return _head->next;
+		 }
+		 const_iterator end() const
+		 {
+			 return _head;
+		 }
+		 const_reverse_iterator rbegin() const
+		 {
+			 return reverse_iterator(end());
+		 }
+		 const_reverse_iterator rend() const
+		 {
+			 return reverse_iterator(begin());
 		 }
 		 iterator insert(iterator pos,const T& x)
 		 {

@@ -39,9 +39,13 @@ int main()
 
 	crin::List<int> lt2(lt);*/
 
-	crin::List<DD> lt;
-	crin::List<DD>::iterator it = lt.begin();
-	it->print();
+	crin::List<int> lt;
+	lt.push_back(1);
+	lt.push_back(2);
+	lt.push_back(3);
+	lt.push_back(4);
+	crin::List<int>::reverse_iterator ri = lt.rbegin();
+	cout<<*ri<<endl;
 	
 	return 0;
 }
