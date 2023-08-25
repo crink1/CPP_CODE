@@ -165,9 +165,9 @@ using namespace std;
 //
 //}
 
-int main()
-
-{
+//int main()
+//
+//{
 
     /*queue<char> Q;
     char x, y;
@@ -204,11 +204,11 @@ int main()
 
     //                queue.push(child_node)
       
-    list<int> l{ 1,2,3,4,5,6,7,8,9,0 };
+  /*  list<int> l{ 1,2,3,4,5,6,7,8,9,0 };
     list<int>::reverse_iterator it = l.rbegin();
     cout<<*++it<<endl;
-    return 0;
-}
+    return 0;*/
+//}
 
 //template<typename T>
 //void removeDuplicates(list<T>& aList)
