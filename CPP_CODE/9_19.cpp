@@ -10,7 +10,7 @@
 //            for (int x : nums) {
 //                if (x <= middle && !visited) {
 //                    count++;
-//                    visited = true;
+//                    FileNamevisited = true;
 //                }
 //                else {
 //                    visited = false;
