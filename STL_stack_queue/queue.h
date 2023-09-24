@@ -16,19 +16,19 @@ namespace crin
 		{
 			_con.pop_back();
 		}
-		const T& front()
+		const T& front() const
 		{
 			return _con.front();
 		}
-		const T& back()
+		const T& back() const
 		{
 			return _con.back();
 		}
-		bool empty()
+		bool empty() const
 		{
 			return _con.empty();
 		}
-		size_t size()
+		size_t size() const
 		{
 			return _con.size();
 		}
