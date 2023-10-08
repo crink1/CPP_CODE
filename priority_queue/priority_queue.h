@@ -4,10 +4,41 @@
 
 namespace crin
 {
+	template<class T>
+	class less
+	{
+	public:
+		bool operator()(const T& x, const T& y)
+		{
+			return x < y;
+		}
+	};
+	template<class T>
+	class greater
+	{
+	public:
+		bool operator()(const T& x, const T& y)
+		{
+			return x > y;
+		}
+	};
+
 	template<class T, class container = vector<T>, class compare = less<T>>
 	class priority_queue
 	{
 	public:
+		priority_queue()
+		{}
+
+		template<class InputIterator>
+		priority_queue(InputIterator begin, InputIterator end)
+			:_con(begin,end)
+		{
+			for (int i = (_con.size() - 2) / 2; i >= 0; i--)
+			{
+				adjust_down(i);
+			}
+		}
 		compare com;
 		void adjust_up(int child)
 		{
@@ -60,17 +91,17 @@ namespace crin
 			adjust_down(0);
 		}
 
-		bool empty()
+		bool empty() const
 		{
 			return _con.empty();
 		}
 
-		size_t size()
+		size_t size() const
 		{
 			return _con.size();
 		}
 
-		const T top()
+		T& top() const
 		{
 			return _con[0];
 		}
