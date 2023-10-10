@@ -1,6 +1,6 @@
 #pragma once
-#include<iostream>
-using namespace std;
+#include"reverse_iterator.h"
+
 namespace crin
 {
 	template<class T>
@@ -16,7 +16,7 @@ namespace crin
 		_List_Node* next;
 	};
 
-	 template<class Iterator, class Ref, class Ptr>
+	/* template<class Iterator, class Ref, class Ptr>
 	 struct Reverse_iterator
 	 {
 		 
@@ -75,7 +75,7 @@ namespace crin
 		 }
 
 
-	 };
+	 };*/
 
 	 template<class T,class Ref,class Ptr>
 	 struct _List_Iterator
@@ -143,8 +143,10 @@ namespace crin
 	 public:
 		 typedef _List_Iterator<T,T&,T*> iterator;
 		 typedef _List_Iterator<T, const T&, const T*> const_iterator;
-		 typedef Reverse_iterator<T, T&, T*> reverse_iterator;
-		 typedef Reverse_iterator<T, const T&, const T*> const_reverse_iterator;
+		 typedef Reverseiterator<iterator, T&, T*> reverse_iterator;
+		 typedef Reverseiterator<const_iterator, const T&, const T*> const_reverse_iterator;
+		 //typedef Reverse_iterator<T, T&, T*> reverse_iterator;
+		 //typedef Reverse_iterator<T, const T&, const T*> const_reverse_iterator;
 		 iterator begin()
 		 {
 			 return _head->next;
@@ -153,14 +155,22 @@ namespace crin
 		 {
 			 return _head;
 		 }
-		 reverse_iterator rbegin()
+		  reverse_iterator rbegin()
+		 {
+			 return reverse_iterator(--end());
+		 }
+		 reverse_iterator rend()
+		 {
+			 return reverse_iterator(end());
+		 }
+		/* reverse_iterator rbegin()
 		 {
 			 return reverse_iterator(end());
 		 }
 		 reverse_iterator rend()
 		 {
 			 return reverse_iterator(begin());
-		 }
+		 }*/
 		 const_iterator begin() const
 		 {
 			 return _head->next;
@@ -169,14 +179,22 @@ namespace crin
 		 {
 			 return _head;
 		 }
-		 const_reverse_iterator rbegin() const
+		  const_reverse_iterator rbegin() const
+		 {
+			 return reverse_iterator(--end());
+		 }
+		 const_reverse_iterator rend() const
+		 {
+			 return reverse_iterator(end());
+		 }
+		/* const_reverse_iterator rbegin() const
 		 {
 			 return reverse_iterator(end());
 		 }
 		 const_reverse_iterator rend() const
 		 {
 			 return reverse_iterator(begin());
-		 }
+		 }*/
 		 iterator insert(iterator pos,const T& x)
 		 {
 			 Node* next = pos._Node;
