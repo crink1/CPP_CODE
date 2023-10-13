@@ -1,6 +1,8 @@
 //#include <iostream>
 //#include <vector>
 //using namespace std;
+//
+//
 
 //DP35
 //int main() {
@@ -108,5 +110,31 @@
 //{
 //	vector<int> v(10);
 //	cout << v.size();
+//	return 0;
+//}
+
+//class a
+//{
+//
+//private:
+//	static int b;
+//};
+//
+//int a::b = 3;
+//
+
+//class myclass
+//{
+//public:
+//	void foo()
+//	{
+//		delete this;
+//	}
+//};
+//
+//int main()
+//{
+//	myclass* my = new myclass;
+//	my->foo();
 //	return 0;
 //}
