@@ -61,3 +61,92 @@
 //        return ret;
 //    }
 //};
+//#include <iostream>
+//
+//using namespace std;
+//
+//class A
+//{
+//public:
+//    virtual void print()
+//    {
+//        cout << "A::print()" << "\n";
+//    }
+//};
+//
+//class B : public A
+//{
+//public: virtual void print()
+//{
+//    cout << "B::print()" << "\n";
+//}
+//};
+//
+//class C : public A
+//{
+//public: virtual void print()
+//{
+//    cout << "C::print()" << "\n";
+//}
+//};
+//
+//void print(A a)
+//{
+//    a.print();
+//}
+//
+//int main()
+//{
+//    A a, * aa, * ab, * ac;
+//    B b;
+//    C c;
+//    aa = &a;
+//    ab = &b;
+//    ac = &c;
+//    a.print();
+//    b.print();
+//    c.print();
+//    aa->print();
+//    ab->print();
+//    ac->print();
+//    print(a);
+//    print(b);
+//    print(c);
+//}
+//#include <iostream>
+//using namespace std;
+//
+//class parent {
+//    int i;
+//protected:
+//    int x;
+//public:
+//    parent() { x = 0; i = 0; }
+//    void change() { x++; i++; }
+//    void display();
+//};
+//
+//class son :public parent {
+//public:
+//    void modify();
+//};
+//
+//void parent::display() {
+//    cout << "x=" << x << endl;
+//}
+//
+//void son::modify() {
+//    x++;
+//}
+//
+//int main() {
+//    son A;
+//    parent B;
+//    A.display();
+//    A.change();
+//    A.modify();
+//    A.display();
+//    B.change();
+//    B.display();
+//    return 0;
+//}
