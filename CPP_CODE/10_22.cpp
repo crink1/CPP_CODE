@@ -146,43 +146,43 @@ void printvf(vft* f)
 //	B* p = &x;
 //	printvf((vft*)(*(int*)p));
 //	return 0;
-//}
+//}s
 
 
-class A
-{
-public:
-	virtual void fun()
-	{
-		cout << "A:fun" << endl;
-	}
-	virtual void fun1()
-	{
-		cout << "A:fun1" << endl;
-	}
-};
-
-class B
-{
-	virtual void fun()
-	{
-		cout << "B:fun" << endl;
-	}
-	virtual void fun2()
-	{
-		cout << "B:fun2" << endl;
-	}
-	
-};
-
-class X :public A ,public B
-{
-	virtual void fun()
-	{
-		cout << "X:fun" << endl;
-	}
-	virtual void fun3()
-	{
-		cout << "X:fun3" << endl;
-	}
-};
+//class A
+//{
+//public:
+//	virtual void fun()
+//	{
+//		cout << "A:fun" << endl;
+//	}
+//	virtual void fun1()
+//	{
+//		cout << "A:fun1" << endl;
+//	}
+//};
+//
+//class B
+//{
+//	virtual void fun()
+//	{
+//		cout << "B:fun" << endl;
+//	}
+//	virtual void fun2()
+//	{
+//		cout << "B:fun2" << endl;
+//	}
+//	
+//};
+//
+//class X :public A ,public B
+//{
+//	virtual void fun()
+//	{
+//		cout << "X:fun" << endl;
+//	}
+//	virtual void fun3()
+//	{
+//		cout << "X:fun3" << endl;
+//	}
+//};
