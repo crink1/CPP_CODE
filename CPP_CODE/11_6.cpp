@@ -1,8 +1,8 @@
-//#include<iostream>
-//#include<vector>
-//#include<set>
-//#include<map>
-//using namespace std;
+#include<iostream>
+#include<vector>
+#include<set>
+#include<map>
+using namespace std;
 
 //int main()
 //{		
@@ -86,7 +86,7 @@
 //    TestMap();
 //    return 0;
 //}
-//
+
 //class Solution {
 //public:
 //    struct cmp
@@ -113,3 +113,11 @@
 //        return v;
 //    }
 //};
+
+//int main()
+//{
+//	map<string, int> m;
+//	string str = "dwa";
+//	m[str]++;
+//	return 0;
+//}
