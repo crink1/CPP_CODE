@@ -129,8 +129,11 @@ private:
 	{
 		if (root == nullptr)
 		{
-
+			return 0;
 		}
+		int lefthight = _Hight(root->_left);
+		int righthight = _Hight(root->_right);
+		return lefthight > righthight ? lefthight + 1 : righthight + 1;
 	}
 
 	bool _IsBalance(const node* root)
@@ -141,6 +144,13 @@ private:
 		}
 		int lefthight = _Hight(root->_left);
 		int righthight = _Hight(root->_right);
+		if (righthight - lefthight != root->_bf)
+		{
+			cout <<root->_kv.first<< "当前平衡因子异常" << ;
+			return false;
+		}
+
+
 		return abs(righthight - lefthight) < 2
 			&& _IsBalance(root->left)
 			&& _IsBalance(root->_right);
