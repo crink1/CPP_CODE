@@ -100,6 +100,7 @@ public:
 				{
 					RotateLR(parent);
 				}
+				break;
 			}
 			else
 			{
@@ -120,10 +121,8 @@ public:
 
 	bool IsBalance()
 	{
-		_IsBalance(_root);
+		return _IsBalance(_root);
 	}
-
-private:
 
 	int _Hight(node* root)
 	{
@@ -136,6 +135,10 @@ private:
 		return lefthight > righthight ? lefthight + 1 : righthight + 1;
 	}
 
+private:
+
+	
+
 	bool _IsBalance(const node* root)
 	{
 		if (root == nullptr)
@@ -146,13 +149,13 @@ private:
 		int righthight = _Hight(root->_right);
 		if (righthight - lefthight != root->_bf)
 		{
-			cout <<root->_kv.first<< "当前平衡因子异常" << ;
+			cout << root->_kv.first << "当前平衡因子异常" << endl;
 			return false;
 		}
 
 
 		return abs(righthight - lefthight) < 2
-			&& _IsBalance(root->left)
+			&& _IsBalance(root->_left)
 			&& _IsBalance(root->_right);
 	}
 
@@ -289,15 +292,15 @@ private:
 		}
 		else if (bf == 1)
 		{
-			subl->_bf = 0;
+			subl->_bf = -1;
 			parent->_bf = 0;
-			sublr->_bf = -1;
+			sublr->_bf = 0;
 		}
 		else if (bf == -1)
 		{
 			subl->_bf = 0;
-			parent->_bf = 0;
-			sublr->_bf = 1;
+			parent->_bf = 1;
+			sublr->_bf = 0;
 		}
 		else
 		{

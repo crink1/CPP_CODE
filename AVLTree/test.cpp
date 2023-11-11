@@ -8,9 +8,14 @@ int main()
 	AVLTree<int,int> at;
 	for (auto i : a)
 	{
+		if (i == 14)
+		{
+			int x = 0;
+		}
 		at.insert(make_pair(i, i));
 	}
 	at.InOrder();
+	at.IsBalance();
 
 	return 0;
 }
