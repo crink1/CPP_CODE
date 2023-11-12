@@ -92,7 +92,7 @@ public:
 				{
 					RotateL(parent);
 				}
-				else if (parent->_bf = 2 && cur->_bf == -1)
+				else if (parent->_bf == 2 && cur->_bf == -1)
 				{
 					RotateRL(parent);
 				}
@@ -115,6 +115,7 @@ public:
 
 	void InOrder()
 	{
+		
 		_InOrder(_root);
 		cout << endl;
 	}
@@ -123,6 +124,13 @@ public:
 	{
 		return _IsBalance(_root);
 	}
+
+	int Hight()
+	{
+		return _Hight(_root);
+	}
+
+private:
 
 	int _Hight(node* root)
 	{
@@ -134,10 +142,6 @@ public:
 		int righthight = _Hight(root->_right);
 		return lefthight > righthight ? lefthight + 1 : righthight + 1;
 	}
-
-private:
-
-	
 
 	bool _IsBalance(const node* root)
 	{
