@@ -5,34 +5,34 @@ enum Colour
 	BLACK
 };
 
-template<class K,class V>
+template<class K,class T>
 struct RBTreeNode
 {
 	struct RBTreeNode* _left;
 	struct RBTreeNode* _right;
 	struct RBTreeNode* _parent;
 	Colour _col;
-	pair<K, V> _kv;
-	RBTreeNode(const pair<K,V>& kv)
+	T _data;
+	RBTreeNode(const T& data)
 		:_left(nullptr)
 		,_right(nullptr)
 		,_parent(nullptr)
-		,_kv(kv)
+		,_data(data)
 		,_col(RED)
 	{}
 
 };
 
-template<class K, class V>
+template<class K, class T,class KeyOfT>
 class RBTree
 {
 	typedef struct RBTreeNode<K, V> Node;
 public:
-	bool Insert(const pair<K,V>& kv)
+	bool Insert(const T& data)
 	{
 		if (_root == nullptr)
 		{
-			_root = new Node(kv);
+			_root = new Node(data);
 			_root->_col = BLACK;
 			return true;
 		}
@@ -55,7 +55,7 @@ public:
 				return false;
 			}
 		}
-		cur = new Node(kv);
+		cur = new Node(data);
 		if (parent->_kv.first > kv.first)
 		{
 			parent->_left = cur;
