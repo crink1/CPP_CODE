@@ -5,7 +5,7 @@ enum Colour
 	BLACK
 };
 
-template<class K,class T>
+template<class T>
 struct RBTreeNode
 {
 	struct RBTreeNode* _left;
@@ -23,40 +23,161 @@ struct RBTreeNode
 
 };
 
+
+
+template<class T, class Ref, class Ptr>
+struct Tree_Iterator
+{
+	typedef struct RBTreeNode<T> Node;
+	typedef struct Tree_Iterator<T, Ref, Ptr> self;
+	Node* _node;
+	Tree_Iterator(Node* node)
+		:_node(node)
+	{}
+						
+
+	Ref operator*()
+	{
+		return _node->_data;
+	}
+	Ptr operator->()
+	{
+		return &_node->_data;
+	}
+	
+	bool operator!=(const self& s)
+	{
+		return _node != s._node;
+	}
+
+	bool operator==(const self& s)
+	{
+		return _node == s._node;
+	}
+
+	self& operator++()
+	{
+		if (_node->_right)
+		{
+			Node* cur = _node->_right;
+			while (cur->_left)
+			{
+				cur = cur->_left;
+			}
+			_node = cur;
+		}
+		else
+		{
+			Node* cur = _node;
+			Node* parent = _node->_parent;
+			while (parent && cur == parent->_right)
+			{
+				cur = parent;
+				parent = cur->_parent;
+			}
+			_node = parent;
+		}
+		return *this;
+	}
+
+	self& operator--()
+	{
+		if (_node->_left)
+		{
+			Node* cur = _node->_left;
+			while (cur->_right)
+			{
+				cur = cur->_right;
+			}
+			_node = cur;
+
+		}
+		else
+		{
+			Node* cur = _node;
+			Node* parent = _node->_parent;
+			while (parent && cur == parent->_left)
+			{
+				cur = parent;
+				parent = parent->_parent;
+			}
+			_node = parent;
+		}
+	}
+
+};
+
+
 template<class K, class T,class KeyOfT>
 class RBTree
 {
-	typedef struct RBTreeNode<K, V> Node;
+	typedef struct RBTreeNode<T> Node;
+	
 public:
-	bool Insert(const T& data)
+	typedef struct Tree_Iterator<T, T&, T*> iterator;
+	typedef struct Tree_Iterator<T, const T&, const T*> const_iterator;
+	iterator begin()
+	{
+		Node* cur = _root;
+		while (cur && cur->_left)
+		{
+			cur = cur->_left;
+		}
+		return iterator(cur);
+	}
+
+	iterator end()
+	{
+		return iterator(nullptr);
+	}
+
+	const_iterator begin() const
+	{
+		Node* cur = _root;
+		while (cur && cur->_left)
+		{
+			cur = cur->_left;
+		}
+		return const_iterator(cur);
+	}
+
+	const_iterator end() const
+	{
+		return const_iterator(nullptr);
+	}
+
+	pair<Node*,bool> Insert(const T& data)
 	{
 		if (_root == nullptr)
 		{
 			_root = new Node(data);
 			_root->_col = BLACK;
-			return true;
+			return make_pair(_root,true);
 		}
 		Node* parent = nullptr;
 		Node* cur = _root;
+		
+		KeyOfT kot;
 		while (cur)
 		{
-			if (cur->_kv.first > kv.first)
+			if (kot(cur->_data) > kot(data))
 			{
 				parent = cur;
 				cur = cur->_left;
 			}
-			else if(cur->_kv.first < kv.first)
+			else if(kot(cur->_data) < kot(data))
 			{
 				parent = cur;
 				cur = cur->_right;
 			}
 			else
 			{
-				return false;
+				return make_pair(cur,false);
 			}
 		}
 		cur = new Node(data);
-		if (parent->_kv.first > kv.first)
+		Node* ret = cur;
+		if (kot(parent->_data) > kot(data))
 		{
 			parent->_left = cur;
 			cur->_parent = parent;
@@ -133,7 +254,7 @@ public:
 			}
 		}
 		_root->_col = BLACK;
-		return true;
+		return make_pair(ret,true);
 
 	}
 
