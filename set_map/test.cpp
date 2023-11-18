@@ -55,10 +55,10 @@ void test_map()
 
 	string arr[] = { "芙宁娜", "瑶瑶","芙宁娜", "香菱", "钟离", "香菱", "纳西妲", "雷电将军", "锅巴", "玉桂", "刻晴", "甘雨", "甘雨" };
 	crin::map<string, int> countMap;
-	/*for (auto& e : arr)
+	for (auto& e : arr)
 	{
 		countMap[e]++;
-	}*/
+	}
 
 	for (auto& kv : countMap)
 	{
