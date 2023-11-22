@@ -82,6 +82,7 @@ struct Tree_Iterator
 
 	self& operator--()
 	{
+		if(_node->_parent->_parent)
 		if (_node->_left)
 		{
 			Node* cur = _node->_left;
@@ -319,6 +320,12 @@ public:
 		}
 		return nullptr;
 	}
+
+	bool empty()
+	{
+		return _root == nullptr;
+	}
+
 
 private:
 	//гва§

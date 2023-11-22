@@ -26,10 +26,22 @@ namespace crin
 			return _t.end();
 		}
 		
+		size_t size()
+		{
+			return _t.Size();
+		}
+
+		bool empty() 
+		{
+			return _t.empty();
+		}
+
 		pair<iterator,bool> insert(const K& k)
 		{
 			return _t.Insert(k);
 		}
+
+		
 	private:
 		RBTree<K, K,SetKeyOfT> _t;
 	};
