@@ -1,7 +1,6 @@
 #pragma once
-#include<iostream>
 #include<assert.h>
-using namespace std;
+
 
 namespace crin
 {
@@ -11,6 +10,7 @@ namespace crin
 		public:
 			typedef T* iterator;
 			typedef const T* const_iterator;
+
 
 			iterator begin()
 			{
@@ -34,6 +34,15 @@ namespace crin
 
 			vector()
 			{}
+
+			vector(initializer_list<T> lt)
+			{
+				reserve(lt.size());
+				for (auto& e : lt)
+				{
+					push_back(e);
+				}
+			}
 
 			template<class inputiterator>
 			vector(inputiterator begin, inputiterator end)
