@@ -61,7 +61,7 @@ void TestHT2()
 	ht.insert(make_pair("abc", 1));
 	ht.insert(make_pair("acb", 1));
 	ht.insert(make_pair("aad", 1));
-
+	//cout << ht.size() << endl;
 	ht.Print();
 }
 

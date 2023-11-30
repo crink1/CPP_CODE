@@ -122,13 +122,23 @@ namespace crin_open_addres
 			}
 			return false;
 		}
+		const size_t size() 
+		{
+			return _n;
+		}
+
+		bool empty()
+		{
+			return _n == 0;
+		}
+
 		void Print()
 		{
 			for (int i = 0; i < _table.size(); i++)
 			{
 				if (_table[i]._s == EXIST)
 				{
-					//printf("[%d]->%d\n", i, _tables[i]._kv.first);
+					
 					cout << "[" << i << "]->" << _table[i]._kv.first << ":" << _table[i]._kv.second << endl;
 				}
 				else if (_table[i]._s == EMPTY)
@@ -147,5 +157,37 @@ namespace crin_open_addres
 	private:
 		vector<HashData> _table;
 		size_t _n;
+	};
+}
+
+namespace crin_HB
+{
+	template<class K,class V>
+	struct HashNode
+	{
+		HashNode* next;
+		pair<K, V> _kv;
+		HashNode(const pair<K, V>& kv)
+			:next(nullptr)
+			,_kv(kv)
+		{}
+	};
+
+	template<class K,class V>
+	class HashTable
+	{
+		typedef HashNode<K, V> Node;
+	public:
+		HashTable()
+		{
+			_tables.resize(10);
+		}
+		bool insert(const pair<K,V>& kv)
+		{
+
+		}
+	private:
+		vector<Node*> _tables;
+		size_t _n = 0;
 	};
 }
