@@ -1,5 +1,30 @@
 #pragma once
 #include<vector>
+
+
+template<class T>
+struct HashFunc
+{
+	size_t operator()(const T& data)
+	{
+		return (size_t)data;
+	}
+};
+
+template<>
+struct HashFunc<string>
+{
+	size_t operator()(const string& data)
+	{
+		int sum = 0;
+		for (auto& i : data)
+		{
+			sum += i;
+		}
+		return sum * 31;
+
+	}
+};
 namespace crin_open_addres
 {
 	enum status
@@ -20,29 +45,7 @@ namespace crin_open_addres
 		status _s;
 	};
 
-	template<class T>
-	struct HashFunc
-	{
-		size_t operator()(const T& data)
-		{
-			return (size_t)data;
-		}
-	};
-
-	template<>
-	struct HashFunc<string>
-	{
-		size_t operator()(const string& data)
-		{
-			int sum = 0;
-			for (auto& i : data)
-			{
-				sum += i;
-			}
-			return sum * 31;
-
-		}
-	};
+	
 
 
 	template<class K, class V,class Hash = HashFunc<K>>
@@ -173,7 +176,7 @@ namespace crin_HB
 		{}
 	};
 
-	template<class K,class V>
+	template<class K,class V, class hash = HashFunc<K>>
 	class HashTable
 	{
 		typedef HashNode<K, V> Node;
@@ -182,9 +185,153 @@ namespace crin_HB
 		{
 			_tables.resize(10);
 		}
+		~HashTable()
+		{
+			for (int i = 0; i < _tables.size(); i++)
+			{
+				Node* cur = _tables[i];
+				while (cur)
+				{
+					Node* next = cur->next;
+					delete cur;
+					cur = next;
+				}
+				_tables[i] = nullptr;
+			}
+		}
 		bool insert(const pair<K,V>& kv)
 		{
 
+			if (find(kv.first))
+			{
+				return false;
+			}
+			hash hf;
+			if (_n == _tables.size())
+			{
+				
+				/*size_t newsize = _tables.size() * 2;
+				HashTable newhash;
+				newhash._tables.resize(newsize);
+				for (int i = 0; i < _tables.size(); i++)
+				{
+					Node* cur = _tables[i];
+					while (cur)
+					{
+						newhash.insert(cur->_kv);
+						cur = cur->next;
+					}
+				}
+				_tables.swap(newhash._tables);*/
+				vector<Node*> newtable;
+				newtable.resize(_tables.size() * 2, nullptr);
+				for (int i = 0; i < _tables.size(); i++)
+				{
+					Node* cur = _tables[i];
+					while (cur)
+					{
+						Node* next = cur->next;
+						size_t s = hf(cur->_kv.first) % newtable.size();
+						cur->next = newtable[i];
+						newtable[i] = cur;
+						cur = next;
+					}
+					_tables[i] = nullptr;
+				}
+				_tables.swap(newtable);
+			}
+
+			size_t hashi = hf(kv.first) % _tables.size();
+
+			Node* newnode = new Node(kv);
+
+			newnode->next = _tables[hashi];
+			_tables[hashi] = newnode;
+			++_n;
+			return true;
+			
+		}
+
+		Node* find(const K& key) 
+		{
+			hash hf;
+			size_t hashi = hf(key) % _tables.size();
+			Node* cur = _tables[hashi];
+			while (cur)
+			{
+				if (cur->_kv.first == key)
+				{
+					return cur;
+				}
+				cur = cur->next;
+			}
+			return nullptr;
+		}
+		bool erase(const K& key)
+		{
+			hash hf;
+			size_t hashi = hf(key) % _tables.size();
+			Node* prev = nullptr;
+			Node* cur = _tables[hashi];
+			while (cur)
+			{
+				if (cur->_kv.first == key)
+				{
+					if (prev == nullptr)
+					{
+						_tables[hashi] = cur->next;
+					}
+					else
+					{
+						prev->next = cur->next;
+
+					}
+					delete cur;
+
+					return true;
+				}
+				prev = cur;
+				cur = cur->next;
+			}
+			return false;
+			
+		}
+		void Some()
+		{
+			size_t bucketSize = 0;
+			size_t maxBucketLen = 0;
+			size_t sum = 0;
+			double averageBucketLen = 0;
+
+			for (size_t i = 0; i < _tables.size(); i++)
+			{
+				Node* cur = _tables[i];
+				if (cur)
+				{
+					++bucketSize;
+				}
+
+				size_t bucketLen = 0;
+				while (cur)
+				{
+					++bucketLen;
+					cur = cur->next;
+				}
+
+				sum += bucketLen;
+
+				if (bucketLen > maxBucketLen)
+				{
+					maxBucketLen = bucketLen;
+				}
+			}
+
+			averageBucketLen = (double)sum / (double)bucketSize;
+
+			printf("all bucketSize:%d\n", _tables.size());
+			printf("bucketSize:%d\n", bucketSize);
+			printf("maxBucketLen:%d\n", maxBucketLen);
+			printf("averageBucketLen:%lf\n\n", averageBucketLen);
 		}
 	private:
 		vector<Node*> _tables;
