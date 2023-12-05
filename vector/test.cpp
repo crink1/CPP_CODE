@@ -1,7 +1,9 @@
 #include<iostream>
 #include<vector>
 #include<string>
+
 using namespace std;
+
 #include"vector.h"
 
 //void test_vector1()
@@ -27,6 +29,7 @@ using namespace std;
 //		++it;
 //	}
 //	cout << endl;
+//	
 //
 //	for (auto e : v)
 //	{
