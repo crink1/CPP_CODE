@@ -39,6 +39,13 @@ namespace crin
             string tmp(s._str);
             swap(tmp);
         }
+        string(string&& s)
+            :_str(nullptr)
+            , _size(0)
+            , _capacity(0)
+        {     
+            swap(s);
+        }
         /*string(const string& s)
         {
             _str = new char[s._capacity + 1];
@@ -49,6 +56,11 @@ namespace crin
 
         //ÏÖ´úÐ´·¨
         string& operator=(string s)
+        {
+            swap(s);
+            return *this;
+        }
+        string& operator=(string&& s)
         {
             swap(s);
             return *this;
