@@ -3,31 +3,28 @@
 #include<map>
 using namespace std;
 #include"UnionFindSet.h"
+#include"Graph.h"
 
 
-class Solution {
-public:
-    int findCircleNum(vector<vector<int>>& isConnected) {
-        UnionFindSet<int> ufs(isConnected.size());
-        for (size_t i = 0; i < isConnected.size(); i++)
-        {
-            for (size_t j = 0; j < isConnected[i].size(); j++)
-            {
-                if (isConnected[i][j] == 1)
-                {
-                    ufs.Union(i, j);
-                }
-            }
-        }
-        return ufs.setsize();
-    }
-};
+void TestGraph()
+{
+    crin::Graph<char, int, INT_MAX, true> g("0123", 4);
+    g.addedge('0', '1', 1);
+    g.addedge('0', '3', 4);
+    g.addedge('1', '3', 2);
+    g.addedge('1', '2', 9);
+    g.addedge('2', '3', 8);
+    g.addedge('2', '1', 5);
+    g.addedge('2', '0', 3);
+    g.addedge('3', '2', 6);
+    g.print();
+}
 
 int main()
 {
-    Solution s;
-    vector<vector<int>> a = { {1, 1, 0},{1, 1, 0},{0, 0, 1} };
-   int ret =  s.findCircleNum(a);
-   cout<<ret<<endl;
+    
+    
+    TestGraph();
+   
 	return 0;
 }

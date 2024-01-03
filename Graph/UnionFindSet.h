@@ -19,6 +19,11 @@ public:
 		{
 			return ;
 		}
+
+		if (abs(_ufs[root1]) < abs(_ufs[root2]))
+		{
+			swap(root1, root2);
+		}
 		_ufs[root1] += _ufs[root2];
 		_ufs[root2] = root1;
 	}
@@ -29,6 +34,13 @@ public:
 		while (_ufs[root] >= 0)
 		{
 			root = _ufs[root];
+		}
+		// Â·¾¶Ñ¹Ëõ
+		while (_ufs[x] >= 0)
+		{
+			int parent = _ufs[x];
+			_ufs[x] = root;
+			x = parent;
 		}
 		return root;
 	}
