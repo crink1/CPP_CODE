@@ -6,14 +6,15 @@ namespace crin
 	template<class V,class W, W MAX_W = INT_MAX, bool Direction = false>
 	class Graph
 	{
+		typedef Graph<V, W, MAX_W, Direction> self;
 	public:
 
 		Graph(const V* v, size_t n)
 		{
-			_vertex.reserve(n);
+			_vertexs.reserve(n);
 			for (int i = 0; i < n; i++)
 			{
-				_vertex.push_back(v[i]);
+				_vertexs.push_back(v[i]);
 				_indexmap[v[i]] = i;
 			}
 			_matrix.resize(n);
@@ -51,12 +52,66 @@ namespace crin
 			}
 		}
 
+		void BFS(const V& src)
+		{
+			int srci = getindex(src);
+			queue<int> q;
+			vector<bool> visited(_vertexs.size(), false);
+			q.push(srci);
+			visited[srci] = true;
+			int levelsize = 1;
+			size_t n = _vertexs.size();
+
+			while (!q.empty())
+			{
+				for (int i = 0; i < levelsize; i++)
+				{
+					int front = q.front();
+					q.pop();
+					cout << front << ":" << _vertexs[front] << endl;
+
+					for (int i = 0; i < n; i++)
+					{
+						if (_matrix[front][i] != MAX_W && visited[i] == false)
+						{
+							q.push(i);
+							visited[i] = true;
+						}
+					}
+				}
+				//cout << endl;
+				levelsize = q.size();
+			}
+			cout << endl;
+
+		}
+
+		void _DFS(size_t srci, vector<int>& visited)
+		{
+			cout << srci << ":" << _vertexs[srci] << endl;
+			visited[srci] = true;
+			for (int i = 0; i < _vertexs.size(); i++)
+			{
+				if (_matrix[srci][i] != MAX_W && visited[i] == false)
+				{
+					_DFS(i, visited);
+				}
+			}
+		}
+
+		void DFS(const V& src)
+		{
+			int srci = getindex(src);
+			vector<int> visited(_vertexs.size(), false);
+			_DFS(srci, visited);
+		}
+
 
 		void print()
 		{
-			for (int i = 0; i < _vertex.size(); i++)
+			for (int i = 0; i < _vertexs.size(); i++)
 			{
-				cout << "[" << i << "]" << "->" << _vertex[i] << endl;
+				cout << "[" << i << "]" << "->" << _vertexs[i] << endl;
 			}
 			cout << endl;
 
@@ -78,8 +133,13 @@ namespace crin
 			}
 		}	
 
+		w kruskal(self& mintree)
+		{
+
+		}
+
 	private:
-		vector<V> _vertex;
+		vector<V> _vertexs;
 		map<V, size_t> _indexmap;
 		vector<vector<W>> _matrix;
 	};
@@ -114,10 +174,10 @@ namespace link_tables
 
 		Graph(const V* v, size_t n)
 		{
-			_vertex.reserve(n);
+			_vertexs.reserve(n);
 			for (int i = 0; i < n; i++)
 			{
-				_vertex.push_back(v[i]);
+				_vertexs.push_back(v[i]);
 				_indexmap[v[i]] = i;
 			}
 			_table.resize(n, nullptr);
@@ -163,7 +223,7 @@ namespace link_tables
 		}
 
 	private:
-		vector<V> _vertex;
+		vector<V> _vertexs;
 		map<V, size_t> _indexmap;
 		vector<Edge*> _table;
 	};
