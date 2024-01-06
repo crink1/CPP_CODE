@@ -133,8 +133,78 @@ namespace crin
 			}
 		}	
 
-		w kruskal(self& mintree)
+		struct Edge
 		{
+			size_t _srci;
+			size_t _dsti;
+			W _w;
+
+			Edge(size_t srci, size_t dsti, const W& w)
+				:_srci(srci)
+				,_dsti(dsti)
+				,_w(w)
+			{}
+
+			bool operator>(const Edge& e) const
+			{
+				return _w > e._w;
+			}
+		};
+
+		W kruskal(self& mintree)
+		{
+			size_t n = _vertexs.size();
+			mintree._indexmap = _indexmap;
+			mintree._vertexs = _vertexs;
+			mintree._matrix.resize(n);
+			for (size_t i = 0; i < n; i++)
+			{
+				mintree._matrix[i].resize(n, MAX_W);
+			}
+
+			priority_queue<Edge, vector<Edge>, greater<Edge>> minq;
+			for (int i = 0; i < n; i++)
+			{
+				for (int j = 0; j < n; j++)
+				{
+					if (i < j && _matrix[i][j] != MAX_W)
+					{
+						minq.push(Edge(i, j, _matrix[i][j]));
+					}
+				}
+			}
+
+			int size = 0;
+			W totalw = W();
+			UnionFindSet<size_t> ufs;
+			
+			while (!minq.empty())
+			{
+				Edge min = minq.top();
+				if (!ufs.inset(min._srci, min._dsti))
+				{
+					cout << _vertexs[min._srci] << "->" << _vertexs[min._dsti] << ":" << min._w << endl;
+					mintree.addedge(min._srci, min._dsti, min._w);
+					ufs.Union(min._srci, min._dsti);
+					++size;
+					totalw += min._w;
+				}
+				else
+				{
+					cout << "Óöµ½»·";
+					cout << _vertexs[min._srci] << "->" << _vertexs[min._dsti] << ":" << min._w << endl;
+				}
+				
+			}
+
+			if (size == n - 1)
+			{
+				return totalw;
+			}
+			else
+			{
+				return W();
+			}
 
 		}
 
