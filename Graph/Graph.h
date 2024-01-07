@@ -208,6 +208,34 @@ namespace crin
 
 		}
 
+
+		W prim(self& mintree, const W& src)
+		{
+			size_t srci = getindex(src);
+			size_t n = _vertexs.size();
+			mintree._indexmap = _indexmap;
+			mintree._vertexs = _vertexs;
+			mintree._matrix.resize(n);
+			for (int i = 0; i < n; i++)
+			{
+				mintree._matrix[i].resize(n, MAX_W);
+			}
+
+			vector<bool> X(n, false);
+			vector<bool> Y(n, false);
+			X[srci] = true;
+			Y[srci] = false;
+
+			priority_queue<Edge, vector<Edge>, greater<Edge>> minq;
+			for (int i = 0; i < n; i++)
+			{
+				if (_matrix[srci][i] != MAX_W)
+				{
+					minq.push(Edge(srci, i, _matrix[srci][i]));
+				}
+			}
+		}
+
 	private:
 		vector<V> _vertexs;
 		map<V, size_t> _indexmap;
