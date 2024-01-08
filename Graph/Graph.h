@@ -1,5 +1,10 @@
 #pragma once
-
+#include <vector>
+#include <map>
+#include <set>
+#include <string>
+#include <queue>
+#include <functional>
 
 namespace crin
 {
@@ -8,7 +13,7 @@ namespace crin
 	{
 		typedef Graph<V, W, MAX_W, Direction> self;
 	public:
-
+		Graph() = default;
 		Graph(const V* v, size_t n)
 		{
 			_vertexs.reserve(n);
@@ -39,17 +44,23 @@ namespace crin
 			}
 		}
 
-		void addedge(const V& src, const V& dst, const W& w)
+		void _addedge(size_t srci, size_t dsti, const W& w)
 		{
-			size_t srci = getindex(src);
-			size_t dsti = getindex(dst);
-
+			
 			_matrix[srci][dsti] = w;
 
 			if (Direction == false)
 			{
 				_matrix[dsti][srci] = w;
 			}
+		}
+
+		void addedge(const V& src, const V& dst, const W& w)
+		{
+			size_t srci = getindex(src);
+			size_t dsti = getindex(dst);
+			_addedge(srci, dsti, w);
+			
 		}
 
 		void BFS(const V& src)
@@ -176,15 +187,16 @@ namespace crin
 
 			int size = 0;
 			W totalw = W();
-			UnionFindSet<size_t> ufs;
+			UnionFindSet<int> ufs(n);
 			
 			while (!minq.empty())
 			{
 				Edge min = minq.top();
+				minq.pop();
 				if (!ufs.inset(min._srci, min._dsti))
 				{
 					cout << _vertexs[min._srci] << "->" << _vertexs[min._dsti] << ":" << min._w << endl;
-					mintree.addedge(min._srci, min._dsti, min._w);
+					mintree._addedge(min._srci, min._dsti, min._w);
 					ufs.Union(min._srci, min._dsti);
 					++size;
 					totalw += min._w;
@@ -222,7 +234,7 @@ namespace crin
 			}
 
 			vector<bool> X(n, false);
-			vector<bool> Y(n, false);
+			vector<bool> Y(n, true);
 			X[srci] = true;
 			Y[srci] = false;
 
@@ -234,8 +246,48 @@ namespace crin
 					minq.push(Edge(srci, i, _matrix[srci][i]));
 				}
 			}
-		}
 
+			size_t size = 0;
+			W totalw = W();
+
+			while (!minq.empty())
+			{
+				Edge min = minq.top();
+				minq.pop();
+				if (X[min._dsti])
+				{
+					cout<<"³É»·" << endl;
+				}
+				else
+				{
+					mintree._addedge(min._srci, min._dsti, min._w);
+					X[min._dsti] = true;
+					Y[min._dsti] = false;
+					++size;
+					totalw += min._w;
+					if (size == n - 1)
+					{
+						break;
+					}
+					for (int i = 0; i < n; i++)
+					{
+						if (_matrix[min._dsti][i] != MAX_W && Y[i])
+						{
+							minq.push(Edge(min._dsti, i, _matrix[min._dsti][i]));
+						}
+					}
+				}
+			}
+			if (size == n - 1)
+			{
+				return totalw;
+			}
+			else
+			{
+				return W();
+			}
+		}
+		
 	private:
 		vector<V> _vertexs;
 		map<V, size_t> _indexmap;

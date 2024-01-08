@@ -1,5 +1,6 @@
 #pragma once
-
+#include <vector>
+#include <map>
 
 
 template<class T>
@@ -7,6 +8,7 @@ template<class T>
 class UnionFindSet
 {
 public:
+	//UnionFindSet() = default;
 	UnionFindSet(size_t n)
 		:_ufs(n,-1)
 	{}
@@ -20,7 +22,7 @@ public:
 			return ;
 		}
 
-		if (abs(_ufs[root1]) < abs(_ufs[root2]))
+		if (fabs(_ufs[root1]) < fabs(_ufs[root2]))
 		{
 			swap(root1, root2);
 		}

@@ -1,8 +1,5 @@
 #include<iostream>
-#include<vector>
-#include<map>
-#include<queue>
-#include<functional>
+
 using namespace std;
 #include"UnionFindSet.h"
 #include"Graph.h"
@@ -31,11 +28,44 @@ void TestGraph()
 
 }
 
+void TestGraphMinTree()
+{
+	const char str[] = "abcdefghi";
+	crin::Graph<char, int> g(str, strlen(str));
+	g.addedge('a', 'b', 4);
+	g.addedge('a', 'h', 8);
+	//g.addedge('a', 'h', 9);
+	g.addedge('b', 'c', 8);
+	g.addedge('b', 'h', 11);
+	g.addedge('c', 'i', 2);
+	g.addedge('c', 'f', 4);
+	g.addedge('c', 'd', 7);
+	g.addedge('d', 'f', 14);
+	g.addedge('d', 'e', 9);
+	g.addedge('e', 'f', 10);
+	g.addedge('f', 'g', 2);
+	g.addedge('g', 'h', 1);
+	g.addedge('g', 'i', 6);
+	g.addedge('h', 'i', 7);
+
+	crin::Graph<char, int> kminTree;
+	cout << "Kruskal:" << g.kruskal(kminTree) << endl;
+	kminTree.print();
+	cout << endl << endl;
+
+	crin::Graph<char, int> pminTree;
+	cout << "Prim:" << g.prim(pminTree, 'a') << endl;
+	pminTree.print();
+	cout << endl;
+
+	
+}
+
 int main()
 {
     
     
-    TestGraph();
-   
+    //TestGraph();
+	TestGraphMinTree();
 	return 0;
 }
