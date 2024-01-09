@@ -58,14 +58,38 @@ void TestGraphMinTree()
 	pminTree.print();
 	cout << endl;
 
+
+
 	
 }
 
+
+void testdijkstra()
+{
+	const char* str = "syztx";
+		crin::Graph<char, int, INT_MAX, true> g(str, strlen(str));
+		g.addedge('s', 't', 10);
+		g.addedge('s', 'y', 5);
+		g.addedge('y', 't', 3);
+		g.addedge('y', 'x', 9);
+		g.addedge('y', 'z', 2);
+		g.addedge('z', 's', 7);
+		g.addedge('z', 'x', 6);
+		g.addedge('t', 'y', 2);
+		g.addedge('t', 'x', 1);
+		g.addedge('x', 'z', 4);
+		g.print();
+		vector<int> dist;
+		vector<int> parentPath;
+		g.dijkstra('s', dist, parentPath);
+		g.PrintShortPath('s', dist, parentPath);
+}
 int main()
 {
     
     
     //TestGraph();
-	TestGraphMinTree();
+	//TestGraphMinTree();
+	testdijkstra();
 	return 0;
 }

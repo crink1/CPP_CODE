@@ -256,7 +256,7 @@ namespace crin
 				minq.pop();
 				if (X[min._dsti])
 				{
-					cout<<"成环" << endl;
+					cout<<"G" << endl;
 				}
 				else
 				{
@@ -285,6 +285,76 @@ namespace crin
 			else
 			{
 				return W();
+			}
+		}
+
+		void PrintShortPath(const V& src, const vector<W>& dist, const vector<int>& pPath)
+		{
+			size_t n = _vertexs.size();
+			size_t srci = getindex(src);
+
+
+			for (int i = 0; i < n; i++)
+			{
+				if (i != srci)
+				{
+					vector<int> path;
+					size_t parenti = i;
+					while (parenti != srci)
+					{
+						path.push_back(parenti);
+						parenti = pPath[parenti];
+					}
+					path.push_back(srci);
+					reverse(path.begin(), path.end());
+
+					for (auto& e : path)
+					{
+						cout << _vertexs[e] << "->";
+					}
+					cout<<dist[i]<<endl;
+				}
+			}
+		}
+
+		void dijkstra(const V& src, vector<W>& dist, vector<int>& pPath)
+		{
+			size_t n = _vertexs.size();
+			size_t srci = getindex(src);
+			dist.resize(n, MAX_W);
+			pPath.resize(n, -1);
+
+			dist[srci] = 0;
+			pPath[srci] = srci;
+			//已经确定最短路径的顶点集合
+			vector<bool> S(n, false);
+
+			for (int j = 0; j < n; j++)
+			{
+				int u = 0;
+				W min = MAX_W;
+
+				//选出最短路径的顶点
+				for (int i = 0; i < n; i++)
+				{
+					if (S[i] == false && dist[i] < min)
+					{
+						u = i;
+						min = dist[i];
+					}
+				}
+				S[u] = true;
+				//松弛更新
+				for(int v = 0; v < n; v++)
+				{
+					if (S[v] == false && _matrix[u][v] != MAX_W && dist[u] + _matrix[u][v] < dist[v])
+					{
+						dist[v] = dist[u] + _matrix[u][v];
+						pPath[v] = u;
+					}
+				}
+
+
 			}
 		}
 		
@@ -367,11 +437,7 @@ namespace link_tables
 		}
 
 
-		void print()
-		{
-			
-		}
-
+		
 	private:
 		vector<V> _vertexs;
 		map<V, size_t> _indexmap;
