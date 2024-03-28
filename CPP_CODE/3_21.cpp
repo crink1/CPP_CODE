@@ -1,4 +1,4 @@
-c/*lass Solution {
+/*class Solution {
 public:
     int findTargetSumWays(vector<int>& nums, int target) {
         int n = nums.size();
