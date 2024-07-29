@@ -1,12 +1,12 @@
-#include <iostream>
-#include <cmath>
-using namespace std;
-
-int main() {
-    long long n = 0;
-    cin >> n;
-    long long x = sqrt(n);
-    cout << x * x << endl;
-    return 0;
-}
-// 64 位输出请用 printf("%lld")
+//#include <iostream>
+//#include <cmath>
+//using namespace std;
+//
+//int main() {
+//    long long n = 0;
+//    cin >> n;
+//    long long x = sqrt(n);
+//    cout << x * x << endl;
+//    return 0;
+//}
+//// 64 位输出请用 printf("%lld")
